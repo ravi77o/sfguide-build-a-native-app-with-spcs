@@ -1,5 +1,5 @@
-CREATE APPLICATION ROLE app_admin;
-CREATE APPLICATION ROLE app_user;
+CREATE APPLICATION ROLE IF NOT EXISTS app_admin;
+CREATE APPLICATION ROLE IF NOT EXISTS app_user;
 CREATE SCHEMA IF NOT EXISTS app_public;
 GRANT USAGE ON SCHEMA app_public TO APPLICATION ROLE app_admin;
 GRANT USAGE ON SCHEMA app_public TO APPLICATION ROLE app_user;
@@ -38,10 +38,26 @@ BEGIN
             QUERY_WAREHOUSE=''' || whname || '''';
 GRANT USAGE ON SERVICE app_public.st_spcs TO APPLICATION ROLE app_user;
 
-RETURN 'Service started. Check status, and when ready, get URL';
+-- this GRANT is new since the quickstart was published
+GRANT SERVICE ROLE app_public.st_spcs!service_Role TO APPLICATION ROLE app_user;
+
+RETURN 'Service started. Check status, and when ready, get URL with app_public.app_url()';
 END;
 $$;
 GRANT USAGE ON PROCEDURE app_public.start_app(VARCHAR, VARCHAR) TO APPLICATION ROLE app_admin;
+
+CREATE OR REPLACE PROCEDURE app_public.update_app()
+    RETURNS string
+    LANGUAGE sql
+AS $$
+BEGIN
+    ALTER SERVICE app_public.st_spcs FROM SPECIFICATION_FILE='/fullstack.yaml';
+    GRANT USAGE ON SERVICE app_public.st_spcs TO APPLICATION ROLE app_user;
+
+RETURN 'Service started. Check status, and when ready, get URL with app_public.app_url()';
+END;
+$$;
+GRANT USAGE ON PROCEDURE app_public.update_app() TO APPLICATION ROLE app_admin;
 
 CREATE OR REPLACE PROCEDURE app_public.stop_app()
     RETURNS string
