@@ -12,7 +12,7 @@ For prerequisites, environment setup, step-by-step guide and instructions, pleas
 
 This fork includes GitHub actions for CI/CD w/ the Snowpark Native app. 
 Once you've gone through the Quickstart Guide above, you can follow the [GitHub Actions setup](#github-actions-setup) to
-get things working with GitHub Actions. If you did the "delete everything" steps at the end of the guide, you'll want to go back in and recreate everything, and validate you can access the running application
+get things working with GitHub Actions. If you did the "delete everything" steps at the end of the guide, you'll want to go back in and recreate everything, and validate you can access the running application.
 
 See the [blog post draft](https://docs.google.com/document/d/1fTHpKovtuCUSGwNrdDbwOyJMJvByzGtZpRAkZ9leUng/edit) for more background and motivations behind this project.
 
@@ -20,7 +20,7 @@ See the [blog post draft](https://docs.google.com/document/d/1fTHpKovtuCUSGwNrdD
 
 ## GitHub Actions Setup
 
-Again, assuming you've gone through the other work in the Quickstart Guide, you can now set up GitHub Actions to build and deploy your Native App. All the assets you need are already here in this repository, including the SQL steps in [./scripts/github_actions_script.sql](./scripts/github_actions_script.sql) and the workflow in [./.github/workflows/snowpark-tag-push-publish-update.yml](./.github/workflows/snowpark-tag-push-publish-update.yml).
+Again, assuming you've gone through the other work in the Quickstart Guide, you can now set up GitHub Actions to build and deploy your Native App. All the assets you need are already here in this repository, including the SQL steps in [./scripts/github_actions_script.sql](./scripts/github_actions_script.sql) and the workflow in [./.github/workflows/snowpark-tag-push-publish-update.yaml](./.github/workflows/snowpark-tag-push-publish-update.yaml).
 
 ### 1.1 Create Packager User
 
